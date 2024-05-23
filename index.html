@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación de Formularios</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+
+    </header>
+    <main>
+        <section>
+            <h1>Formulario</h1>
+            <form id="myForm" action="" method="post"> <!--- action="" lo guarda en el propio archivo-->
+                <label for="Titulo">Título</label>
+                <input type="text" name="Titulo" id="Titulo">
+                <label for="Director">Director</label>
+                <input type="text" name="Director" id="Director">
+                <label for="Año">Año</label>
+                <input type="number" name="Año" id="Año">
+                <label for="Genero" id="Genero">Género</label>
+                <select name="Genero" id="Genero">
+                    <option value="" selected disabled>Selecciona Género</option>
+                    <option value="Horror">Horror</option>
+                    <option value="Acción">Acción</option>
+                    <option value="Comedia">Comedia</option>
+                    <option value="Sci-Fi">Sci-Fi</option>
+                </select>
+                <ul id="listaErrores">
+                </ul>
+                <button id="Submit" type="submit">Enviar Consulta</button>
+            </form>
+        </section>
+        <section>
+            <h2>Mostrar</h2>
+            <select name="Filtro" id="Filtro">
+                <option value="selecciona">Selecciona Género</option>
+            </select>
+            <table id="myTable">
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Director</th>
+                        <th>Año</th>
+                        <th>Género</th>
+                    </tr>
+                </thead>
+                <tbody id="peliculasFiltradas">
+
+                </tbody>
+            </table>
+            <div id="noSelect">
+            </div>
+
+        </section>
+
+    </main>
+    <footer>
+
+
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
