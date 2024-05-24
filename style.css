@@ -61,8 +61,11 @@ h2 {
 
 #Filtro {
     display: block;
-    height: 20px;
+    height: 24px;
+    background-color: rgb(240, 236, 236);
+    border-radius: 0.5cap;
     float: right;
+    margin-top: -40px;
     margin-right: 10px;
     margin-bottom: 20px;
 }

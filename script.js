@@ -1,8 +1,3 @@
-// Validación de formularios
-// FormData averigurar si acumula cada submit. diria que no, entonces crear otra const que acumule push.
-// en el segundo filtro cuando el array esta vacio ese boton debe estar disable. luego una vez activo, cuando no haya ninguna peli de ese genero, que salte un mensaje que no hay pelis de ese genero. otra opcion es que se llene ese filtro solo con los generos que hay en el array.
-
-
 document.addEventListener('DOMContentLoaded', () => {
 
 const myForm = document.querySelector('#myForm');
@@ -17,6 +12,7 @@ let generosUnicosArray = [];
 const fragment = document.createDocumentFragment()
 
 // EVENTOS
+
 myForm.addEventListener('submit',(event)=>{
     event.preventDefault();
     validarForm();
@@ -66,7 +62,7 @@ const validarForm =()=> {
     } else {
         peliculasAcumulado.push({titulo, director, año, genero});
         listaErrores.innerHTML = '';
-        myForm.reset() //COMPROBAR ESTO
+        myForm.reset();
     };
 };
 
@@ -76,7 +72,7 @@ const recogerGeneros = () => {
     const generosUnicos = new Set(generosAcumulado);
     generosUnicosArray = [...generosUnicos]
     })}
-//function crearOptions // para el segundo filtro//
+
 const pintarOptions = () => {
     filtro.innerHTML='';
     const seleccionaGenero = document.createElement('option');
@@ -86,11 +82,12 @@ const pintarOptions = () => {
         const option = document.createElement('option')
         option.value = genero;
         option.textContent = genero;
+        //fragment.append(option);
+        //filtro.appendChild(option); fuera del forEach
 
         filtro.appendChild(option);
     })
 }
-
 
 const pintarPelisFiltradas = () => {
     peliculasFiltradas.innerHTML = '';
@@ -117,6 +114,8 @@ const pintarPelisFiltradas = () => {
             newGenero.innerHTML = element.genero;
 
             newRow.append(newTitulo, newDirector, newAño, newGenero);
+            // fragment.append(newRow);
+            //peliculasFiltradas.append(fragment);
             peliculasFiltradas.append(newRow);
         });
     } else if (filtro.value === generosUnicosArray[1]) {
@@ -182,6 +181,7 @@ const pintarPelisFiltradas = () => {
 };
 };
 
+// aqui podria haber hecho primero una funcion solo para filtrar, y luego una segunda que pinto solo para ese filtro.
     
     /* otra forma relativa a objValidar
     if (titulo!='') {
@@ -213,19 +213,5 @@ const pintarPelisFiltradas = () => {
         errores +=
     }
 }]*/
-
-//otra forma de validar
-
-// regexr.com y regex101.com para practicar y testear expresiones regulares y cuando ya este bien la traemos a codigo.
-
-//validar email ^[a-z0-9]+@[a-z0-9]+\.[a-z](2,6)$
-
-//titulo acepta casi todo.
-//Director una o dos o tres palabras
-//Año cuatro cifras y entre 1800 y fecha actual (escalable, que vincule)
-// los datos de la pelicula, al enviar consulta, se generara un objeto con los campos del form (una vez validados), y luego almacenarlos en un array.
-//solo una funcion para llamar e imprimir los filtros
-
-//2 eventos: submit para almacenar // y el seclect de filtra change.
 
 });
