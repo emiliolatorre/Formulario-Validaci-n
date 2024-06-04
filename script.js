@@ -4,8 +4,12 @@ const myForm = document.querySelector('#myForm');
 const filtro = document.querySelector('#Filtro');
 const noSelect = document.querySelector('#noSelect');
 const peliculasFiltradas = document.querySelector('#peliculasFiltradas');
+const localStg = document.querySelector('#localStg');
+const listaLocal = document.querySelector('#listaLocal');
+const borrarLocal = document.querySelector('#borrarLocal');
 
 const peliculasAcumulado = [];
+let peliculasAcumuladoLocal = [];
 const generosAcumulado = [];
 let generosUnicosArray = [];
 
@@ -19,11 +23,19 @@ myForm.addEventListener('submit',(event)=>{
     recogerGeneros();
     pintarOptions();
     peliculasFiltradas.innerHTML = '';
+    almacenarPeliculasLocal();
+    pintarPeliculasLocal();
 });
 
 filtro.addEventListener('change', (event) => {
     pintarPelisFiltradas();
-  });
+});
+
+borrarLocal.addEventListener('click', (event) => {
+    localStorage.clear();
+    peliculasAcumuladoLocal = [];
+    pintarPeliculasLocal();
+});
 
 // FUNCIONES
 
@@ -61,6 +73,7 @@ const validarForm =()=> {
         listaErrores.innerHTML=errores
     } else {
         peliculasAcumulado.push({titulo, director, año, genero});
+        peliculasAcumuladoLocal.push({titulo, director, año, genero});
         listaErrores.innerHTML = '';
         myForm.reset();
     };
@@ -181,37 +194,27 @@ const pintarPelisFiltradas = () => {
 };
 };
 
-// aqui podria haber hecho primero una funcion solo para filtrar, y luego una segunda que pinto solo para ese filtro.
+// Funcion para almacenar el Local Storage
+const almacenarPeliculasLocal = () => {
+    localStorage.setItem("peliculas", JSON.stringify(peliculasAcumuladoLocal));
+}
+
+const pintarPeliculasLocal = () => {
+    listaLocal.innerHTML = '';
+    let peliculasLocal = JSON.parse(localStorage.getItem("peliculas"));
     
-    /* otra forma relativa a objValidar
-    if (titulo!='') {
-        if(regExp.test(titulo)) {
-            objValidar.titulo='true';
-        }
-    } else {
-        alert('titulo incorrecto');
-    }
+    peliculasLocal.forEach(({titulo, director, año, genero}) => {
+        const peliLocal = document.createElement('li');
+        peliLocal.innerHTML= `${titulo}, ${director}, ${año}, ${genero}`;
+        peliLocal.classList.add('pelislocal');
+        fragment.append(peliLocal);
+    });
     
-    if (director!='') {
-        objValidar.director='true';
-    }
-    
-    if (año!='') {
-        objValidar.año='true';
-    }
-    
-    if (genero!='') {
-        objValidar.genero='true';
-    }
-    
-    const valoresObjValidar=object.values(objValidar)
-    const noValidado = valoresObjValidar.find((elemento)=>elemento === false)
-    // como noValidado nos va a dar false,
-    if (noValidado) {
-        errores +=
-    } else {
-        errores +=
-    }
-}]*/
+    listaLocal.append(fragment);
+    localStg.append(listaLocal);
+}
+
+
+// Funcion para pintar el Local Storage
 
 });
